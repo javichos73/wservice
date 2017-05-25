@@ -1,0 +1,49 @@
+#files to ignore
+
+__pycache__/
+
+#extensions to ignore
+*.css
+*.log
+*.map
+*.pot
+*.pyc
+*.pyd
+*.pyo
+
+
+
+#directories to ignore
+*.vscode/
+.idea/
+.installed.cfg
+bin
+develop-eggs
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+src/*.egg-info/
+
+
+
+# Node components
+*node_modules
+
+
+# archivos generados a partir de typescript
+/serviceapp/src/app/**/*.js
+
+
+# TypeScript
+static/typings/
+
+#archivos estaticos para produccion
+staticfiles/
+
+#migraciones
+#*migrations/
+
+#settings
