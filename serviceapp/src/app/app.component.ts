@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import {HttpModule} from '@angular/http';
-import {ProductoService} from './producto/productoService';
+import {ProductoService} from './model/productoService';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,5 @@ import {ProductoService} from './producto/productoService';
   providers: [ProductoService, HttpModule]
 })
 export class AppComponent {
-  title = 'SI TRABAJA O NO !';
+  title = 'Pagina inicial !';
 }

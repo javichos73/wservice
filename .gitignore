@@ -3,7 +3,7 @@
 __pycache__/
 
 #extensions to ignore
-*.css
+#*.css
 *.log
 *.map
 *.pot
@@ -38,10 +38,10 @@ src/*.egg-info/
 
 
 # TypeScript
-static/typings/
+#static/typings/
 
 #archivos estaticos para produccion
-staticfiles/
+#staticfiles/
 
 #migraciones
 #*migrations/

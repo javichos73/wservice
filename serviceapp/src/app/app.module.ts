@@ -4,20 +4,30 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {ProductoComponent} from './producto/producto.component';
-import {ProductoService} from './producto/productoService';
+import {ProductoListComponent} from './producto-list/producto-list.component';
+import {ProductoDetailComponent} from './producto-detail/producto-detail.component';
+//import {ProductoService} from './model/productoService';
+
+import { AppRoutingModule } from './app-routing.module';
+import { MinValidatorDirective } from './validadores/min-validator.directive';
+import { MaxValidatorDirective } from './validadores/max-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductoComponent
+    ProductoListComponent,
+    ProductoDetailComponent,
+    //ProductoService,
+    MinValidatorDirective,
+    MaxValidatorDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
   ],
-  providers: [ProductoService],
-  bootstrap: [AppComponent, ProductoComponent]
+  //providers: [ProductoService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
