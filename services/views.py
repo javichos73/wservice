@@ -6,8 +6,6 @@
 
 from .models import Producto
 from rest_framework import viewsets
-from rest_framework import filters
-from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from .serializers import ProductoSerializer
 
@@ -29,9 +27,8 @@ class ProductoViewSet(viewsets.ReadOnlyModelViewSet):
             p_criterio = nombres.split(" ")
             qset = Q()
             for i in p_criterio:
-                print("qset", qset)
                 qset = qset & (
-                    Q(nombre_prod__icontains=i) | Q(cod_barras_prod__icontains=i))
+                    Q(nombre_prod__icontains=i))  # | Q(cod_barras_prod__icontains=i))
             return Producto.objects.filter(qset).distinct()
         # si no viene parametro nombres, se envian todos.
         return Producto.objects.all()

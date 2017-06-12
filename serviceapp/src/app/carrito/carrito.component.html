@@ -1,0 +1,53 @@
+<div *ngIf="compra.length==0">
+    <p>Aun no tienes productos en tu carrito!.
+        Agrega <a routerLink="/productos" routerLinkActive="active">Aqui</a> productos para calcular tu compra.
+    </p>
+</div>
+<section *ngIf="compra.length>0">
+    <div>
+        <button (click)="activarPanel()">Descartar lista</button>
+        <a routerLink="/producto-scan" routerLinkActive="active">Escanear</a>
+    </div>
+    <table class="table table-hover" *ngIf="compra.length>0">
+        <thead>
+        <tr>
+            <th><i></i>Nombre</th>
+            <th><i aria-hidden="true"></i>Precio</th>
+            <th><i aria-hidden="true"></i>Cantidad</th>
+            <th><i aria-hidden="true"></i>Subtotal</th>
+            <th><i aria-hidden="true"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let detalle of compra; let idx = index">
+            <td>{{ detalle.producto.nombre }}</td>
+            <td>{{ detalle.producto.precio | currency }}</td>
+            <td>
+                <div class="form-group">
+                    <button md-button-raise class="btn btn-default btn-xs" (click)="downQuantity(detalle)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+                    <input mdInput pattern="^^\\d+\\.\\d{2}$" class="smallInput" type="number"
+                           [(ngModel)]="detalle.cantidad"
+                           (focusout)="verificarCantidad(detalle)" (keyup)="calcular(detalle)"/>
+                    <button md-button-raise class="btn btn-default btn-xs" (click)="upQuantity(detalle)">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </td>
+            <td>{{ detalle.subtotal | currency:'USD':true:'1.2-2' }}</td>
+            <td class="text-right">
+                <button md-button-raise class="delete" (click)="eliminarDetalle(idx)"></button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="text-right">
+            <td>
+                Productos:{{ compra.length }}
+            </td>
+            <td colspan="4">Total: {{ totalCompra() | currency:'USD':true:'1.2-2' }}</td>
+        </tr>
+        </tfoot>
+    </table>
+</section>

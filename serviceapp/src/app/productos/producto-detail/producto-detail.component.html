@@ -1,0 +1,13 @@
+<section *ngIf="producto">
+    <!-- description -->
+    <section>
+        <h2>Producto: {{ producto.nombre }}</h2>
+        <h3>Descripción</h3>
+        <p>
+            {{ producto.nombre }} precio: {{ producto.precio }} cantidad: {{ producto.cantidad }}.
+        </p>
+        <button type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
+                (click)="agregarACarrito(producto)">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar
+        </button>
+    </section>

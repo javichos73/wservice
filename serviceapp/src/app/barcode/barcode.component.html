@@ -1,0 +1,20 @@
+<md-card class="text-center">
+    <h3 class="text-center">Barcode Scanner</h3>
+    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex-item">
+            <button md-fab (click)="barCodeScan()">
+                <md-icon>BarcodeScanner</md-icon>
+            </button>
+            <button md-fab [routerLink]="['media']">
+                <md-icon>Camara</md-icon>
+            </button>
+        </div>
+
+    </div>
+
+</md-card>
+
+<md-card>
+    <router-outlet></router-outlet>
+</md-card>
+

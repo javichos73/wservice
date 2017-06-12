@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import {HttpModule} from '@angular/http';
-import {ProductoService} from './model/productoService';
+import {ProductoService} from './productos/shared/producto.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,5 @@ import {ProductoService} from './model/productoService';
   providers: [ProductoService, HttpModule]
 })
 export class AppComponent {
-  title = 'Pagina inicial !';
+  titulo = 'Wservice';
 }

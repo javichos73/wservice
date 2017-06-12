@@ -1,0 +1,59 @@
+<section *ngIf="isLoading && !errorMessage">
+
+</section>
+<form>
+    <div>
+        Busqueda de Producto:
+        <md-input-container class="example-full-width">
+            <input mdInput #bproducto placeholder="Ingrese el nombre a buscar" (input)="code$.next($event.target.value)"
+                   (keyup)="onChange()">
+        </md-input-container>
+    </div>
+
+    <!--<tabla-acciones
+                       [isEditar]="isEditar"
+                       [isEliminar]="isEliminar"
+                       [isBuscador]="isBuscador">
+       </tabla-acciones>
+       -->
+    <div class="flex-container text-center" fxLayout="row" fxLayoutAlign="center center">
+        <md-spinner color="accent" *ngIf="isLoading==true"></md-spinner>
+        <div class="flex-item">
+
+
+            <table class="table table-hover" *ngIf="tabla">
+                <thead>
+                <tr>
+                    <th><i aria-hidden="true"></i>Nombre</th>
+                    <th><i aria-hidden="true"></i>Precio</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let producto of productos">
+                    <!-- <td><md-checkbox (change)="selectedItem(producto)"></md-checkbox></td> -->
+                    <td><a routerLink="/producto/detail/{{ producto.codigo_barras }}"
+                           routerLinkActive="active">{{ producto.nombre }}</a></td>
+                    <td>{{ producto.precio  | currency:'USD':true:'1.2-2' }}</td>
+                    <td *ngIf="producto.cantidad > 0"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </td>
+                    <td *ngIf="producto.cantidad == 0"><span class="glyphicon glyphicon-remove"
+                                                             aria-hidden="true"></span></td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
+                                (click)="agregarACarrito(producto)">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar
+                        </button>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+<!-- HERE: added this error message -->
+<section *ngIf="errorMessage">
+    {{ errorMessage }}
+</section>

@@ -1,0 +1,101 @@
+<div class="flex-container" fxLayout="row" fxLayout.xs="column"
+     fxLayoutAlign="center center"
+     fxLayoutAlign.xs="start">
+
+    <md-card class="flex-item" fxFlex="50">
+
+        <div class="flex-container" fxLayout="row">
+            <div class="flex-item" fxFlex="90">
+                <md-input-container>
+                    <input mdInput #isbn maxlength="50">
+                    <md-placeholder>
+                        Barcode Number
+                    </md-placeholder>
+                    <md-hint align="end">
+                        {{ isbn.characterCount }}
+                    </md-hint>
+
+                </md-input-container>
+            </div>
+            <div class="flex-item" fxFlex="10">
+
+                <button (click)="onClick()" md-fab>
+                    <md-icon>file_upload</md-icon>
+                </button>
+                <input type="file" accept="image/*" capture="camera" #fileInputbox (cancel)="onCancel($event)"
+                       (change)="onChange($event)"
+                       [ngClass]="['none']">
+            </div>
+
+        </div>
+
+
+        <div class="flex-container" fxLayout="column">
+
+            <div class="thumbnail flex-item show__sm" *ngIf="resultCode">
+                <div class="imgWrapper text-center"><img class="responsive-img" [src]="resultUrl"></div>
+                <div class="caption text-center"><h3 class="code">{{ resultCode }}</h3></div>
+                <md-spinner class="smaller app-spinner" *ngIf="!message"></md-spinner>
+                <div class="flex-item" *ngIf="message">
+                    {{ message }}
+                </div>
+            </div>
+
+            <md-progress-bar *ngIf="startProgress"
+                             class="app-progress flex-item"
+                             mode="indeterminate"
+                             aria-label="Indeterminate progress-bar example"></md-progress-bar>
+
+            <div class="flex-item" *ngIf="error">
+                {{ error }}
+            </div>
+        </div>
+    </md-card>
+
+    <md-card class="flex-item app-input-section hidden__sm" fxFlex="50" *ngIf="resultCode">
+
+        <div class="container">
+            <div class="tab"></div>
+            <div class="paid"><p>Your Ticket Information</p></div>
+            <div class="receipt">
+                <div class="paper">
+                    <div class="title">Mr Blah Blahs</div>
+                    <div class="date">Date: 07/01/2016</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>2 x Adult</td>
+                            <td class="right">$10</td>
+                        </tr>
+                        <tr>
+                            <td>1 x Child</td>
+                            <td class="right">$30</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="sign center">
+                        <img class="small-img" [src]="resultUrl">
+                        <br/>
+                        {{ resultCode }}
+                        <br/>
+                        <md-spinner class="smaller app-spinner" *ngIf="!message"></md-spinner>
+                        <div class="flex-item" *ngIf="message">
+                            {{ message }}
+                        </div>
+                        <div class="thankyou">
+                            Thank you for your business
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                </div>
+            </div>
+
+        </div>
+
+    </md-card>
+
+</div>
+
+

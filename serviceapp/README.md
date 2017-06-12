@@ -1,3 +1,11 @@
+# levantar serve en ssl
+ng serve --host 192.168.2.9 --ssl --ssl-key "C:desarrollo\cert\cert.key" --ssl-cert "C:desarrollo\cert\cert.crt"
+# debug movil
+I:\sw\desarrollo\AndroidSdk\platform-tools\adb forward tcp:9222 localabstract:chrome_devtools_remote
+
+# certificado
+openssl req -new -nodes -keyout linuxito.key -out linuxito.csr -days 3650
+
 # Serviceapp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.

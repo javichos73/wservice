@@ -1,0 +1,37 @@
+<div class="flex-container" fxLayout="row" fxLayout.xs="column"
+     fxLayoutAlign="center center"
+     fxLayoutAlign.xs="start">
+
+    <md-card class="flex-item" fxFlex="50">
+        <p>Mensaje: esta opción solo funciona para Internet explorer 11+. Opcionalmente puede utilizar la
+            aplicación BarCode Scanner</p>
+
+        <div id="interactive" class="viewport clearfix" #interactive></div>
+
+        <div class="show__sm" *ngIf="lastResult">
+            <p>Codigo</p>
+            <p>{{ lastResult || async }}'</p>
+            <p *ngIf="!message">Buscando...</p>
+            <p *ngIf="message">{{ message }}</p>
+        </div>
+    </md-card>
+
+    <md-card class="flex-item app-input-section hidden__sm" fxFlex="50" *ngIf="lastResult">
+
+        <div class="ticket">
+            <div class="datas">
+                <a class="link">
+                    <div class="ribbon">
+                        <div class="label">Producto</div>
+                    </div>
+                    <span>Agregar a Lista</span>
+                    <strong>{{ lastResult || async }}'</strong>
+                    <em *ngIf="!message">Searching...</em>
+                    <em *ngIf="message">{{ message }}</em>
+                </a>
+            </div>
+        </div>
+    </md-card>
+</div>
+
+

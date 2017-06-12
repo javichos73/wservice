@@ -1,0 +1,15 @@
+<section>
+    <div class="select">
+        <label for="videoSource">Camara: </label>
+        <md-select placeHolder="Selecciona la camara" [ngModel]="camara" (changue)="cambiarCamara($event)"
+                   name="videoSource">
+            <md-option [value]="cam" *ngFor="let cam of a">{{ cam.label }}</md-option>
+        </md-select>
+        <span class="example-fill-remaining-space"></span>
+        <button md-raised-button value="Abrir BarCode Scanner" (click)="getScan()">Abir BarcodeScanner</button>
+    </div>
+    <button md-raised-button *ngIf="camara!=''" (click)="videoStart()">VideoStart</button>
+    <video #hardwareVideo></video>
+    <video muted autoplay></video>
+    <div id="scans"></div>
+</section>
