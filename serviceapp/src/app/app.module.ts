@@ -14,10 +14,9 @@ import { AppComponent } from './app.component';
 import {ProductoListComponent} from './productos/producto-list/producto-list.component';
 import {ProductoDetailComponent} from './productos/producto-detail/producto-detail.component';
 import {CarritoComponent} from './carrito/carrito.component';
-// import {ProductoBusquedaComponent} from './components/busqueda/producto-busqueda.component';
+// seccion barcode
 import {BarcodeComponent} from './barcode/barcode.component';
 import {NotFoundComponent} from './shared/not-found/not-found.component';
-// seccion barcode
 import {MediaStreamComponent} from './barcode/media-stream/media-stream.component';
 import {InputFieldComponent} from './barcode/input-field/input-field.component';
 import {ToolbarComponent} from './shared/toolbar/toolbar.component';
