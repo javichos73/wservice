@@ -5,8 +5,8 @@
 </div>
 <section *ngIf="compra.length>0">
     <div>
-        <button (click)="activarPanel()">Descartar lista</button>
-        <a routerLink="/producto-scan" routerLinkActive="active">Escanear</a>
+        <button (click)="descartarLista()">Descartar lista</button>
+      <!--  <a routerLink="/barcode/media" routerLinkActive="active">Escanear</a> -->
     </div>
     <table class="table table-hover" *ngIf="compra.length>0">
         <thead>
@@ -15,7 +15,7 @@
             <th><i aria-hidden="true"></i>Precio</th>
             <th><i aria-hidden="true"></i>Cantidad</th>
             <th><i aria-hidden="true"></i>Subtotal</th>
-            <th><i aria-hidden="true"></i></th>
+            <th><i aria-hidden="true"></i>Eliminar</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +37,8 @@
             </td>
             <td>{{ detalle.subtotal | currency:'USD':true:'1.2-2' }}</td>
             <td class="text-right">
-                <button md-button-raise class="delete" (click)="eliminarDetalle(idx)"></button>
+                <md-icon (click)="eliminarDetalle(idx)" svgIcon="delete" class="s24" aria-label="Eliminar Detalle" ></md-icon>
+
             </td>
         </tr>
         </tbody>

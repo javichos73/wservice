@@ -25,7 +25,7 @@ SECRET_KEY = '-^-(39hdk-n!&g#fwok@5dm=0(qe0$7&kg!g0arosqb9wg5t@*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -71,7 +71,12 @@ TEMPLATES = [
         },
     },
 ]
-
+REST_FRAMEWORK = {
+    # allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 

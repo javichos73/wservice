@@ -25,7 +25,6 @@ export class ProductoDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       const id = params['codigo_barras'];
-      console.log('obteniendo model con codigo: ', id);
       this.productoService
         .get(id)
         .subscribe(p => this.producto = p);
@@ -41,19 +40,6 @@ export class ProductoDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(link);
   }
 
-  saveProductoDetails() {
-    console.log('saved!!!');
-      // this.productoService
-       //   .save(this.model)
-      //    .subscribe(r => console.log(`saved!!! ${JSON.stringify(this.model)}`));
-  }
-
-  /*
-  //alternatively use:
-  gotoPeoplesList(){
-      window.history.back();
-  }
-  */
   agregarACarrito(producto: Producto) {
     this.carritoService.agregarProducto(producto);
     const link = ['/carrito'];

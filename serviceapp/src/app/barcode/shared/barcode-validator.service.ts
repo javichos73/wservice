@@ -25,12 +25,14 @@ export class BarcodeValidatorService {
   }
 
   rawSearchByCode(code): Observable<any> {
+    console.log('va a buscar raw search' + code );
     return this._http.get(`${this.endpoints.search}${code}`)
       .map(response => response.json())
       .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
+    // return error.message || error;
     return Promise.reject(error.message || error);
   }
 

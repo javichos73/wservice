@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {Component, OnInit, OnDestroy, ViewChild, AfterContentInit} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {BarcodeDecoderService} from '../shared/barcode-decoder.service';
@@ -15,12 +16,11 @@ import _date = moment.unitOfTime._date;
   styleUrls: ['./media-stream.component.scss']
 })
 export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit {
-
+  producto : Producto;
   lastResult: any;
   message: any;
   error: any;
   vez = 0;
-
   code$ = new Subject<any>();
 
   @ViewChild('interactive') interactive;
@@ -28,14 +28,14 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
   constructor(private decoderService: BarcodeDecoderService,
               private productoService: ProductoService,
               private cartService: CarritoService,
-              private barcodeValidator: BarcodeValidatorService) {
+              private barcodeValidator: BarcodeValidatorService,
+              private router: Router) {
   };
 
   ngOnInit() {
 
     this.decoderService.onLiveStreamInit();
     this.decoderService.onDecodeProcessed();
-
     this.decoderService.onDecodeDetected()
       .then(code => {
         this.lastResult = code;
@@ -45,7 +45,7 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
       })
       .catch((err) => this.error = `Something Wrong: ${err}`);
 
-    this.barcodeValidator.doSearchbyCode(this.code$)
+    /*this.barcodeValidator.doSearchbyCode(this.code$)
       .subscribe(
         res => {
           this.message = res['prod_nombre'];
@@ -56,13 +56,13 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
           this.message = `An Error! ${err.json().error}`;
         }
       );
+      */
     this.productoService.buscarPorCodigo(this.code$)
       .subscribe(
         res => {
-          this.message = res['prod_nombre'];
-          console.log(Date.now() + ' 1validador buscar:: ' + this.vez++);
-          console.log(this.code$);
-          this.agregarACarrito(res);
+          this.producto = res;
+          const link = ['/producto/detail/' + res['codigo_barras']];
+          this.router.navigate(link);
         },
         err => {
           this.message = `Error! ${err.json().error}`;
@@ -74,13 +74,12 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
     this.productoService.get(this.lastResult)
       .subscribe(
         res => {
-          this.message = res['prod_nombre'];
-          console.log(Date.now() + ' 2validador buscar:: ' + this.vez++);
-          console.log(this.code$);
-          this.agregarACarrito(res);
+          this.producto = res;
+          // this.decoderService.onDecodeStop();
+          // this.agregarACarrito(res);
         },
         err => {
-          this.message = `An Error! ${err.json().error}`;
+          this.message = `Error! ${err.json().error}`;
         }
       );
   }

@@ -9,6 +9,8 @@ import {MdInputModule} from '@angular/material';
 import {MdSelectModule} from '@angular/material';
 import {MdToolbarModule} from '@angular/material';
 import {MdButtonModule} from '@angular/material';
+import {MdIconModule} from '@angular/material';
+
 // componentes
 import { AppComponent } from './app.component';
 import {ProductoListComponent} from './productos/producto-list/producto-list.component';
@@ -63,6 +65,8 @@ import {MaxValidatorDirective} from './shared/validadores/max-validator.directiv
     MdSelectModule,
     MdToolbarModule,
     MdButtonModule,
+    MdIconModule,
+
   ],
   providers: [CarritoService,],
   bootstrap: [AppComponent]

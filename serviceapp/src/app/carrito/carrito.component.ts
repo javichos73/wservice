@@ -1,7 +1,8 @@
 /**
  * Created by Jose Martinez on 30/5/2017.
  */
-
+import {DomSanitizer} from '@angular/platform-browser';
+import {MdIconRegistry} from '@angular/material';
 import {Component, OnInit} from '@angular/core';
 import {Producto} from '../productos/shared/producto';
 import {ProductoService} from '../productos/shared/producto.service';
@@ -11,6 +12,7 @@ import {DetalleCompra} from './shared/detalleCompra';
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
+  styleUrls: ['./carrito.component.css'],
 })
 export class CarritoComponent implements OnInit {
   compra: DetalleCompra[] = [];
@@ -19,7 +21,10 @@ export class CarritoComponent implements OnInit {
   productos: Producto[] = [];
 
   // constructor(private productoService: ProductoService) { }
-  constructor(private carritoService: CarritoService) {
+  constructor(private carritoService: CarritoService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+        'delete',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/delete.svg'));
   }
 
   ngOnInit() {

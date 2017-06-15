@@ -13,20 +13,13 @@ import {Subject} from 'rxjs/Subject';
   selector: 'app-producto-list',
   templateUrl: './producto-list.component.html',
   styleUrls: ['./producto-list.component.css'],
-
 })
+
 export class ProductoListComponent implements OnInit {
   productos: Producto[] = [];
   errorMessage = '';
   isLoading = true;
   seleccionado: 'Agregar';
-  message: string = 'Snack Bar opened.';
-  actionButtonLabel: string = 'Retry';
-  action: boolean = false;
-  setAutoHide: boolean = true;
-  autoHide: number = 10000;
-  addExtraClass: boolean = false;
-
   tabla = false;
   code$ = new Subject<any>();
 
@@ -41,27 +34,14 @@ export class ProductoListComponent implements OnInit {
         res => {
           this.isLoading = false;
           this.tabla = true;
-          console.log(res);
           this.productos = res;
         },
         err => {
           this.isLoading = false;
-          this.message = `An Error! ${err.json().error}`;
+          this.errorMessage = `Error! ${err.json().error}`;
         }
       );
   }
-
-//  buscar(nombre: any) {
-  //   nombre = nombre.trim();
-  //  if (nombre.length > 2) {
-//      this.productoService
-//        .buscarPorNombres(nombre)
-//        .subscribe(
-//          /* happy path */ p => this.productos = p,
-//          /* error path */ e => this.errorMessage = e,
-//          /* onCompleted */ () => this.isLoading = false);
-//    }
-//  }
 
   onChange() {
     this.isLoading = true;
@@ -83,12 +63,4 @@ export class ProductoListComponent implements OnInit {
       setTimeout(resolve, ms);
     });
   }
-
-
-  /*
-   openSnackBar(message: string, action: string) {
-   this.snackBar.open("total Productos: " + this.cartService.getItems().length, "Total:" + this.cartService.getTotal(),{ duration: 2000,});
-   }
-   */
-
 }

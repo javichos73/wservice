@@ -10,5 +10,5 @@ import {ProductoService} from './productos/shared/producto.service';
   providers: [ProductoService, HttpModule]
 })
 export class AppComponent {
-  titulo = 'Wservice';
+  titulo = 'MiCompra Informacion de productos';
 }
