@@ -1,48 +1,56 @@
-<section *ngIf="isLoading && !errorMessage">
-
-</section>
-<form>
-    <div>
-        <p>Busqueda de Producto:</p>
-        <md-input-container >
-            <input mdInput #bproducto placeholder="Ingrese el nombre a buscar" (input)="code$.next($event.target.value)"
-                   (keyup)="onChange()">
+<section>
+    <div >
+        Busqueda de Producto:
+        <md-input-container>
+            <input mdInput #bproducto placeholder="Ingrese el nombre a buscar"
+                   [(ngModel)]="nombreProducto" name="nombreProducto" (keyup)="onChange()">
         </md-input-container>
     </div>
-    <div class="flex-container text-center" fxLayout="row" fxLayoutAlign="center center">
-        <md-spinner color="accent" *ngIf="isLoading==true"></md-spinner>
-        <div class="flex-item">
-            <table class="table table-hover" *ngIf="productos.length>0">
-                <thead>
-                    <tr>
-                        <th><i aria-hidden="true"></i>Nombre</th>
-                        <th><i aria-hidden="true"></i>Precio</th>
-                        <th>Stock</th>
-                        <th>Agregar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let producto of productos">
-                    <td><a routerLink="/producto/detail/{{ producto.codigo_barras }}"
-                           routerLinkActive="active">{{ producto.nombre }}</a></td>
-                    <td>{{ producto.precio  | currency:'USD':true:'1.2-2' }}</td>
-                    <td *ngIf="producto.cantidad > 0"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                    </td>
-                    <td *ngIf="producto.cantidad <= 0"><span class="glyphicon glyphicon-remove"
-                                                             aria-hidden="true"></span></td>
-                    <td>
-                        <button color="primary" type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
-                                (click)="agregarACarrito(producto)">
-                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</form>
-<!-- HERE: added this error message -->
-<section *ngIf="errorMessage">
-    {{ errorMessage }}
+    <app-header *ngIf="numeroItems>0"
+                               [titulo]="'Productos Encontrados'"
+                               [paginaActual]="paginaActual"
+                               [numeroItems]="numeroItems">
+    </app-header>
+    <table class="table table-hover" *ngIf="numeroItems>0">
+        <thead>
+        <tr>
+            <th><i></i>Nombre</th>
+            <th><i aria-hidden="true"></i>Precio</th>
+            <th><i aria-hidden="true"></i>Stock</th>
+            <th><i aria-hidden="true"></i>Agregar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let producto of productos">
+            <!--<td><a routerLink="/producto/detail/{{ producto.codigo_barras }}" routerLinkActive="active">{{ producto.nombre }}</a></td> -->
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio  | currency:'USD':true:'1.2-2' }}</td>
+            <td>
+                <span *ngIf="producto.cantidad > 0" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <span *ngIf="producto.cantidad <= 0" class="glyphicon glyphicon-remove"
+                      aria-hidden="true"></span>
+            </td>
+            <td>
+                <button type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
+                        (click)="agregarACarrito(producto)">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar
+                    <!-- <md-icon svgIcon="ic_compra" class="md-18" aria-label="Agregar a carrito"></md-icon> Agregar -->
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td aling="center"  colspan="4">
+                <app-paginador *ngIf="numeroItems>0"
+                               [pagina_actual]="paginaActual"
+                               [numero_items]="numeroItems"
+                               (cambiar)="onChange($event.pagina)">
+                </app-paginador>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </section>
+<!-- HERE: added this error message -->
+<div *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>

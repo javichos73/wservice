@@ -2,7 +2,7 @@
  * Created by Jose Martinez on 30/5/2017.
  */
 import {DomSanitizer} from '@angular/platform-browser';
-import {MdIconRegistry} from '@angular/material';
+import { MdIconRegistry } from '@angular/material';
 import {Component, OnInit} from '@angular/core';
 import {Producto} from '../productos/shared/producto';
 import {ProductoService} from '../productos/shared/producto.service';
@@ -23,10 +23,16 @@ export class CarritoComponent implements OnInit {
   // constructor(private productoService: ProductoService) { }
   constructor(private carritoService: CarritoService, iconRegistry: MdIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
-        'delete',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/delete.svg'));
-  }
+        'ic_delete',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/ic_delete.svg'));
+    iconRegistry.addSvgIcon(
+        'ic_mas',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/ic_add_circle_outline_black_18px.svg'));
+    iconRegistry.addSvgIcon(
+        'ic_menos',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/ic_remove_circle_outline_black_18px.svg'));
 
+  }
   ngOnInit() {
     this.carritoService.items.subscribe(data => {
       this.compra = data;

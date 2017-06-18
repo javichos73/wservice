@@ -1,5 +1,21 @@
 /* boton eliminar */
+
+table{
+  vertical-align: middle;
+}
 .s24 {
   width: 24px;
   height: 24px;
-  color: #f00; }
+  fill: #f00; }
+
+.smallInput {
+  width: 40px;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.flex-item{
+  display: flex;
+}

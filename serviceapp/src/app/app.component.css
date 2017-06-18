@@ -1,4 +1,7 @@
 /* componente busqueda producto */
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
 .search-result {
   border-bottom: 1px solid gray;
   border-left: 1px solid gray;

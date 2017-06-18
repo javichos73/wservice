@@ -1,12 +1,18 @@
 // host de web service
 const host = {
-  url: 'https://192.168.2.17/webservice'
+  url: 'http://localhost:8000'  // 192.168.2.17/webservice'
 };
 
 // url de apis
 export let appService = {
   // Producto
-  ws_producto: host.url + '/api/producto'
+  ws_producto: host.url + '/api/producto',
+  parametroBuscar : 'search',
+  parametroPagina : 'page',
+};
+
+export let tablaConf = {
+    itemsPorPagina : 10,
 };
 
 export let DECODER_CONFIG;

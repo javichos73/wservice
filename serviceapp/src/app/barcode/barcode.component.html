@@ -1,15 +1,17 @@
 <md-card>
 <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
         <div class="flex-item">
-            <button color="primary" [routerLink]="['media']">
+            <button  md-raised-button color="primary" [routerLink]="['media']">
                 Abrir Camara
             </button>
-            <button color="primary" (click)="barCodeScan()">
+            <span class="fill-remaining-space"></span>
+            <button md-raised-button color="primary" (click)="barCodeScan()">
                 Abrir BarcodeScanner
             </button>
         </div>
    </div>
 </md-card>
+<br>
 <md-card>
     <router-outlet></router-outlet>
 </md-card>

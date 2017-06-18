@@ -1,5 +1,5 @@
 <div *ngIf="compra.length==0">
-    <p>Aun no tienes productos en tu carrito!.
+    <p>No tienes productos en tu carrito!.
         Agrega <a routerLink="/productos" routerLinkActive="active">Aqui</a> productos para calcular tu compra.
     </p>
 </div>
@@ -23,22 +23,18 @@
             <td>{{ detalle.producto.nombre }}</td>
             <td>{{ detalle.producto.precio | currency }}</td>
             <td>
-                <div class="form-group">
-                    <button md-button-raise class="btn btn-default btn-xs" (click)="downQuantity(detalle)">
-                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                    </button>
+
+                <md-toolbar>
+                    <md-icon svgIcon="ic_menos" aria-label="menorar" (click)="downQuantity(detalle)"></md-icon>
                     <input mdInput pattern="^^\\d+\\.\\d{2}$" class="smallInput" type="number"
                            [(ngModel)]="detalle.cantidad"
                            (focusout)="verificarCantidad(detalle)" (keyup)="calcular(detalle)"/>
-                    <button md-button-raise class="btn btn-default btn-xs" (click)="upQuantity(detalle)">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                </div>
+                    <md-icon svgIcon="ic_mas" aria-label="aumentar" (click)="upQuantity(detalle)"></md-icon>
+                </md-toolbar>
             </td>
             <td>{{ detalle.subtotal | currency:'USD':true:'1.2-2' }}</td>
             <td class="text-right">
-                <md-icon (click)="eliminarDetalle(idx)" svgIcon="delete" class="s24" aria-label="Eliminar Detalle" ></md-icon>
-
+                <md-icon (click)="eliminarDetalle(idx)" svgIcon="ic_delete" class="s24" aria-label="Eliminar Detalle" ></md-icon>
             </td>
         </tr>
         </tbody>
