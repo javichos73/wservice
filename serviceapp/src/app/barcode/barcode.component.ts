@@ -18,10 +18,10 @@ export class BarcodeComponent {
     }
     if (navigator.userAgent.match(/Firefox/i)) {
       // Used for Firefox. If Chrome uses this, it raises the "hashchanged" event only.
-      window.location.href = ('zxing://scan/?ret=' + encodeURIComponent(href + '/producto-detail/{CODE}'));
+      window.location.href = ('zxing://scan/?ret=' + encodeURIComponent(href + '/producto/detail/{CODE}'));
     } else {
       // Used for Chrome. If Firefox uses this, it leaves the scan window open.
-      window.open('zxing://scan/?ret=' + encodeURIComponent(href + '/producto-detail/{CODE}'));
+      window.open('zxing://scan/?ret=' + encodeURIComponent(href + '/producto/detail/{CODE}'));
     }
   }
 

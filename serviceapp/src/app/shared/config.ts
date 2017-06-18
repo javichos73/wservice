@@ -1,6 +1,7 @@
 // host de web service
 const host = {
-  url: 'http://localhost:8000'  // 192.168.2.17/webservice'
+  //url: 'http://localhost:8000'  // 192.168.2.17/webservice'
+  url: 'https://192.168.1.10/webservice'
 };
 
 // url de apis

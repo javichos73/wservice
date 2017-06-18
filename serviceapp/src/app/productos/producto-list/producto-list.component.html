@@ -22,8 +22,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let producto of productos">
-            <!--<td><a routerLink="/producto/detail/{{ producto.codigo_barras }}" routerLinkActive="active">{{ producto.nombre }}</a></td> -->
-            <td>{{ producto.nombre }}</td>
+            <td><a routerLink="/producto/detail/{{ producto.codigo_barras }}" routerLinkActive="active">{{ producto.nombre }}</a></td>
+            <!--<td>{{ producto.nombre }}</td> -->
             <td>{{ producto.precio  | currency:'USD':true:'1.2-2' }}</td>
             <td>
                 <span *ngIf="producto.cantidad > 0" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
