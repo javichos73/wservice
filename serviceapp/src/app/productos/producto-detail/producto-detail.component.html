@@ -1,14 +1,44 @@
 <section *ngIf="producto">
     <!-- description -->
+    <h3>Producto: {{ producto.nombre }}</h3>
     <section>
-        <h2>Producto: {{ producto.nombre }}</h2>
-        <h3>Descripción</h3>
-        <p><em>precio:</em> {{ producto.precio }}</p>
-        <p><em>cantidad:</em> {{ producto.cantidad }}.</p>
+        <img *ngIf="producto.imagen" [src]="producto.imagen" alt="foto producto" height="50" width="50">
 
-        <button type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
-                (click)="agregarACarrito(producto)">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar a carrito
-        </button>
+        <table class="table table-hover" *ngIf="numeroItems>0">
+            <thead>
+            <tr>
+                <th colspan="2"><i>{{ producto.nombre }}</i></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Precio</td>
+                <td>{{ producto.precio  | currency:'USD':true:'1.2-2' }}</td>
+            </tr>
+            <tr>
+                <td>Cantidad</td>
+                <td>
+                    <span *ngIf="producto.cantidad > 0" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    <span *ngIf="producto.cantidad <= 0" class="glyphicon glyphicon-remove"
+                          aria-hidden="true"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Ubicacion</td>
+                <td>
+                    <span *ngIf="producto.ubicacion">{{ producto.ubicacion }}</span>
+                    <span *ngIf="!producto.ubicacion">No disponible</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
+                            (click)="agregarACarrito(producto)">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar a carrito
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 </section>

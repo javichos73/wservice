@@ -1,6 +1,7 @@
 /**
  * Created by usuario on 26/5/2017.
  */
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,11 +17,12 @@ import {Producto} from '../shared/producto';
 export class ProductoDetailComponent implements OnInit, OnDestroy {
   producto: Producto;
   sub: any;
+  imagen: any;
 
   constructor(private route: ActivatedRoute,
               private productoService: ProductoService,
               private carritoService: CarritoService,
-              private router: Router) { }
+              private router: Router ){ }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -29,6 +31,7 @@ export class ProductoDetailComponent implements OnInit, OnDestroy {
         .get(id)
         .subscribe(p => this.producto = p);
     });
+
   }
 
   ngOnDestroy() {

@@ -9,6 +9,12 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+
+def carga_funcion(instancia, filename):
+    extension = filename.split('.')[-1]
+    return "%s.%s" % (instancia.cod_barras_prod, extension)
+
+
 class Producto(models.Model):
     codigo_prod = models.AutoField(primary_key=True)
     cod_barras_prod = models.CharField(unique=True, max_length=20)
@@ -23,7 +29,17 @@ class Producto(models.Model):
     cantidadminima = models.DecimalField(db_column='cantidadMinima', max_digits=5, decimal_places=2)  # Field name made lowercase.
     cant_xcaja = models.IntegerField(db_column='cant_xCaja', blank=True, null=True)  # Field name made lowercase.
     cod_subproducto = models.ForeignKey('self', models.DO_NOTHING, db_column='cod_subproducto', blank=True, null=True)
-
+    ubicacion = models.ForeignKey('Ubicacion', blank=True, null=True)
+    imagen = models.ImageField(upload_to =carga_funcion, blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'producto'
+
+    def __str__(self):
+        return self.nombre_prod
+
+
+class Ubicacion(models.Model):
+    seccion = models.CharField(max_length=20, blank=True, null=True)
+    pasillo = models.CharField(max_length=20, blank=True, null=True)
+    estand = models.CharField(max_length=20, blank=True, null=True)

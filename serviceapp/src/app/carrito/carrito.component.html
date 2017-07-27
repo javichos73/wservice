@@ -26,7 +26,7 @@
 
                 <md-toolbar>
                     <md-icon svgIcon="ic_menos" aria-label="menorar" (click)="downQuantity(detalle)"></md-icon>
-                    <input mdInput pattern="^^\\d+\\.\\d{2}$" class="smallInput" type="number"
+                    <input mdInput pattern="^^\\d+\\.\\d{2}$" class="smallInput" maxlength="6" type="number"
                            [(ngModel)]="detalle.cantidad"
                            (focusout)="verificarCantidad(detalle)" (keyup)="calcular(detalle)"/>
                     <md-icon svgIcon="ic_mas" aria-label="aumentar" (click)="upQuantity(detalle)"></md-icon>

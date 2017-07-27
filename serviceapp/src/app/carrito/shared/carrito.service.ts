@@ -3,7 +3,7 @@
  */
 import {Injectable} from '@angular/core';
 
-import {DetalleCompra} from './detalleCompra';
+import {DetalleCompra} from './detalle-compra';
 import {Producto} from '../../productos/shared/producto';
 
 import 'rxjs/add/operator/map';

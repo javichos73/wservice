@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 import {Producto} from '../productos/shared/producto';
 import {ProductoService} from '../productos/shared/producto.service';
 import {CarritoService} from './shared/carrito.service';
-import {DetalleCompra} from './shared/detalleCompra';
+import {DetalleCompra} from './shared/detalle-compra';
 
 @Component({
   selector: 'app-carrito',

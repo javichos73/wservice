@@ -1,6 +1,7 @@
 /**
  * Created by José Martinez on 24/5/2017.
  */
+import {DomSanitizer} from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
 
@@ -21,7 +22,8 @@ export class ProductoService {
   paginaAnterior: string;
   public paginaSiguiente: string;
 
-  constructor(private _http: Http) {
+  constructor(private _http: Http,
+  private sanitizer: DomSanitizer) {
   }
 
   getPaginaSiguiente(): string {
@@ -75,7 +77,7 @@ export class ProductoService {
   }
 
   private handleError(error: any): Promise<any> {
-    const errorMsg = error.message + 'No se pudo obtener los datos'
+    const errorMsg = error.message + 'No se pudo obtener los datos';
     console.error(errorMsg);
     return Promise.reject(error.message || error);
   }
@@ -100,6 +102,8 @@ export class ProductoService {
       precio: Number.parseFloat(r.precio1_prod),
       cantidad: Number.parseFloat(r.cantidad_prod),
       codigo_barras: r.cod_barras_prod,
+      imagen: this.sanitizer.bypassSecurityTrustUrl(r.imagen),
+      ubicacion: r.ubicacion,
     });
     return producto;
   }

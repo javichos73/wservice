@@ -21,15 +21,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() numero = new EventEmitter();
 
   /**
-   * Creates an instance of Pagination.
    *
-   * @param {ResourceService} resource
-   *
-   * @memberOf Pagination
+   * @param iconRegistry
+   * @param sanitizer
    */
   constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer) {
     this.numeroItemsPorPagina = tablaConf.itemsPorPagina;
-    //this.numero_items = 0;
     iconRegistry.addSvgIcon(
       'ic_anterior',
       sanitizer.bypassSecurityTrustResourceUrl('assets/ic_navigate_before_black_18px.svg'));
