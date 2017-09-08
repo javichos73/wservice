@@ -4,16 +4,17 @@
 import {DomSanitizer} from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import {Producto} from './producto';
-import {appService, tablaConf} from '../../shared/config';
+import {appService} from '../../shared/config';
 
 import 'rxjs/add/operator/toPromise';
+
+let sanitizer: DomSanitizer;
 
 @Injectable()
 export class ProductoService {
@@ -22,8 +23,8 @@ export class ProductoService {
   paginaAnterior: string;
   public paginaSiguiente: string;
 
-  constructor(private _http: Http,
-  private sanitizer: DomSanitizer) {
+  constructor(private _http: Http, private sanit: DomSanitizer) {
+    sanitizer = this.sanit;
   }
 
   getPaginaSiguiente(): string {
@@ -44,7 +45,6 @@ export class ProductoService {
       .switchMap(code => this.buscarNombre(code, pagina));
   }
 
-
   buscarNombre(nombres: string, pagina = 1): Observable<any> {
     this.paginaActual = pagina;
     const parametros: URLSearchParams = new URLSearchParams();
@@ -59,8 +59,6 @@ export class ProductoService {
   }
 
   private getHeaders() {
-    // I included these headers because otherwise FireFox
-    // will request text/html
     const headers = new Headers();
     headers.append('Accept', 'application/json');
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
@@ -81,44 +79,30 @@ export class ProductoService {
     console.error(errorMsg);
     return Promise.reject(error.message || error);
   }
-  mapProductos(res : any): Producto[] {
-    // throw new Error('ups! Force choke!');
 
-    // The response of the API has a results
-    // property with the actual results
-    // if ( res.length > 1) {
-    //this.paginaSiguiente = res.next;
-    //this.paginaAnterior = res.previous;
-    //this.numeroItems = res.count;
+  mapProductos(res: any): Producto[] {
     return res.map(toProducto);
-    // }
-    // return [];
   }
 }
 
-  function toProducto(r: any): Producto{
+  function toProducto(r: any): Producto {
+    let imag = r.imagen;
+    if (imag === null) {
+      imag = appService.media + '/generico.jpg';
+    }
+    imag = sanitizer.bypassSecurityTrustUrl(imag);
     const producto = <Producto>({
       nombre: r.nombre_prod,
       precio: Number.parseFloat(r.precio1_prod),
       cantidad: Number.parseFloat(r.cantidad_prod),
       codigo_barras: r.cod_barras_prod,
-      imagen: this.sanitizer.bypassSecurityTrustUrl(r.imagen),
+      imagen: imag,
       ubicacion: r.ubicacion,
     });
     return producto;
   }
 
-  // to avoid breaking the rest of our app
-  // I extract the id from the person url
-  /*function extractId(personData:any){
-    let extractedId = personData.url.replace('http://swapi.co/api/people/','').replace('/','');
-    return parseInt(extractedId);
-  }*/
 
-  function mapProducto(response: Response): Producto{
-     // toPerson looks just like in the previous example
+  function mapProducto(response: Response): Producto {
      return toProducto(response.json());
   }
-
-
-

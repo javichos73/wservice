@@ -5,17 +5,17 @@
 </div>
 <section *ngIf="compra.length>0">
     <div>
-        <button (click)="descartarLista()">Descartar lista</button>
+        <button md-raised-button color="primary"  (click)="descartarLista()">Descartar lista</button>
       <!--  <a routerLink="/barcode/media" routerLinkActive="active">Escanear</a> -->
     </div>
-    <table class="table table-hover" *ngIf="compra.length>0">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th><i></i>Nombre</th>
             <th><i aria-hidden="true"></i>Precio</th>
-            <th><i aria-hidden="true"></i>Cantidad</th>
+            <th><i aria-hidden="true"></i>Cant.</th>
             <th><i aria-hidden="true"></i>Subtotal</th>
-            <th><i aria-hidden="true"></i>Eliminar</th>
+            <th><i aria-hidden="true"></i>Accion</th>
         </tr>
         </thead>
         <tbody>
@@ -23,18 +23,20 @@
             <td>{{ detalle.producto.nombre }}</td>
             <td>{{ detalle.producto.precio | currency }}</td>
             <td>
-
-                <md-toolbar>
-                    <md-icon svgIcon="ic_menos" aria-label="menorar" (click)="downQuantity(detalle)"></md-icon>
-                    <input mdInput pattern="^^\\d+\\.\\d{2}$" class="smallInput" maxlength="6" type="number"
+             <!--
+                <md-toolbar class="md-cantidad">
+                    <md-icon svgIcon="ic_menos" class="md-icon-18" aria-label="menorar" (click)="downQuantity(detalle)"></md-icon>
+              -->      <input mdInput pattern="^^\\d+\\.\\d{2}$" class="smallInput" maxlength="6" type="number"
                            [(ngModel)]="detalle.cantidad"
-                           (focusout)="verificarCantidad(detalle)" (keyup)="calcular(detalle)"/>
-                    <md-icon svgIcon="ic_mas" aria-label="aumentar" (click)="upQuantity(detalle)"></md-icon>
+                           (change)="verificarCantidad(detalle)" (keyup)="calcular(detalle)"/>
+             <!--
+                    <md-icon svgIcon="ic_mas" class="md-icon-18" aria-label="aumentar" ngClass="'md-inactive': detalle.cantidad >= detalle.producto.cantidad" (click)="upQuantity(detalle)"></md-icon>
                 </md-toolbar>
+                -->
             </td>
             <td>{{ detalle.subtotal | currency:'USD':true:'1.2-2' }}</td>
             <td class="text-right">
-                <md-icon (click)="eliminarDetalle(idx)" svgIcon="ic_delete" class="s24" aria-label="Eliminar Detalle" ></md-icon>
+                <md-icon (click)="eliminarDetalle(detalle)" svgIcon="ic_delete" class="md-icon-24 material-icons red" aria-label="Eliminar Detalle" ></md-icon>
             </td>
         </tr>
         </tbody>

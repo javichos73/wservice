@@ -4,7 +4,7 @@
     <section>
         <img *ngIf="producto.imagen" [src]="producto.imagen" alt="foto producto" height="50" width="50">
 
-        <table class="table table-hover" *ngIf="numeroItems>0">
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th colspan="2"><i>{{ producto.nombre }}</i></th>
@@ -18,9 +18,12 @@
             <tr>
                 <td>Cantidad</td>
                 <td>
-                    <span *ngIf="producto.cantidad > 0" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                    <span *ngIf="producto.cantidad <= 0" class="glyphicon glyphicon-remove"
-                          aria-hidden="true"></span>
+                    <span *ngIf="producto.cantidad > 0">
+                        <md-icon class="md-icon-18" svgIcon="ic_ok" aria-label="producto disponible"></md-icon>
+                    </span>
+                    <span *ngIf="producto.cantidad <= 0" >
+                        <md-icon class="md-icon-24" svgIcon="ic_error" aria-label="no disponible"></md-icon>
+                    </span>
                 </td>
             </tr>
             <tr>

@@ -4,7 +4,7 @@
      <button md-icon-button (click)="cambiarPagina(1)" class="bt-paginador">
       <md-icon svgIcon="ic_primera_pag" aria-label="primera pagina"></md-icon>
     </button>
-    <button md-icon-button (click)="cambiarPaginaAnterior()" class="bt-paginador" [disabled]="numero_items < 1">
+    <button md-icon-button (click)="cambiarPaginaAnterior()" class="bt-paginador" [disabled]="pagina_actual <= 1">
       <md-icon svgIcon="ic_anterior"></md-icon>
     </button>
       <md-slider
@@ -17,7 +17,7 @@
               (input)="cambiarPagina($event.value)"
       >
     </md-slider>
-    <button md-icon-button (click)="cambiarPaginaSiguiente()" class="bt-paginador">
+    <button md-icon-button (click)="cambiarPaginaSiguiente()" class="bt-paginador" [disabled]="pagina_actual >= totalPaginas">
       <md-icon svgIcon="ic_siguiente" aria-label="pagina siguiente" class="md-24"></md-icon>
     </button>
 

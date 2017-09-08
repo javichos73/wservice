@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 // angular-material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdInputModule, MdSpinner} from '@angular/material';
+import {MdDialogModule, MdInputModule, MdSpinner} from '@angular/material';
 import {MdSelectModule} from '@angular/material';
 import {MdToolbarModule} from '@angular/material';
 import {MdButtonModule} from '@angular/material';
@@ -12,12 +12,14 @@ import {MdProgressSpinnerModule} from '@angular/material';
 import { MdSliderModule } from '@angular/material';
 import { MdIconRegistry} from '@angular/material';
 import { MdIconModule } from '@angular/material';
+import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdSnackBarModule } from '@angular/material';
 
 // componentes
 import { AppComponent } from './app.component';
 import {ProductoListComponent} from './productos/producto-list/producto-list.component';
 import {ProductoDetailComponent} from './productos/producto-detail/producto-detail.component';
-import {CarritoComponent} from './carrito/carrito.component';
+import {CarritoComponent, CarritoDialog} from './carrito/carrito.component';
 import { PaginationComponent} from './shared/tabla/pagination.component';
 import {HeaderComponent} from './shared/tabla/header.component';
 // seccion barcode
@@ -50,6 +52,7 @@ import {MaxValidatorDirective} from './shared/validadores/max-validator.directiv
     InstantSearchComponent,
     PaginationComponent,
     HeaderComponent,
+    CarritoDialog,
 
   ],
   imports: [
@@ -65,9 +68,12 @@ import {MaxValidatorDirective} from './shared/validadores/max-validator.directiv
     MdProgressSpinnerModule,
     MdSliderModule,
     MdIconModule,
+    MdDialogModule,
+    MdSnackBarModule,
 
   ],
-  providers: [CarritoService, MdIconRegistry],
+  providers: [CarritoService, MdIconRegistry, ],
   bootstrap: [AppComponent],
+  entryComponents: [CarritoDialog]
 })
 export class AppModule { }

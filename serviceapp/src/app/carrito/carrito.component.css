@@ -3,10 +3,7 @@
 table{
   vertical-align: middle;
 }
-.s24 {
-  width: 24px;
-  height: 24px;
-  fill: #f00; }
+
 
 .smallInput {
   width: 40px;
@@ -19,3 +16,22 @@ table{
 .flex-item{
   display: flex;
 }
+.md-cantidad{
+  height: 24px;
+}
+
+.mat-toolbar-row{
+  height: 24px;
+}
+
+.md-icon-18{
+  height: 18px;
+}
+
+.md-icon-24{
+  height: 24px;
+}
+
+.material-icons.red { color: #fb0002; }
+
+.material-icons.md-inactive { background: rgba(255, 255, 255, 0.3); }

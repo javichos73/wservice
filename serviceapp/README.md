@@ -3,8 +3,8 @@ ng serve --host 192.168.2.9 --ssl --ssl-key "C:desarrollo\cert\cert.key" --ssl-c
 # debug movil
 I:\sw\desarrollo\AndroidSdk\platform-tools\adb forward tcp:9222 localabstract:chrome_devtools_remote
 
-# certificado
-openssl req -new -nodes -keyout linuxito.key -out linuxito.csr -days 3650
+# certificado entidad certificadora y crear
+https://waytoit.wordpress.com/2014/02/11/ssl-creando-una-entidad-certificadora/
 
 # Serviceapp
 

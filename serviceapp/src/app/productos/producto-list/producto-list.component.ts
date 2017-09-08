@@ -2,7 +2,7 @@
  * Created by Jose Martinez on 26/5/2017.
  */
 
-// import {MdSnackBar } from '@angular/material';
+import {MdSnackBar } from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Component, OnInit} from '@angular/core';
 import {Producto} from '../shared/producto';
@@ -38,7 +38,7 @@ export class ProductoListComponent implements OnInit {
 
   constructor(private productoService: ProductoService, private cartService: CarritoService,
               iconRegistry: MdIconRegistry, sanitizer: DomSanitizer
-              //           , public snackBar: MdSnackBar
+                         , public snackBar: MdSnackBar
   ) {
     this.paginaActual = 1;
     this.numeroItems = 0;
@@ -60,8 +60,12 @@ export class ProductoListComponent implements OnInit {
     iconRegistry.addSvgIcon(
           'ic_error',
           sanitizer.bypassSecurityTrustResourceUrl('assets/ic_delete_forever_black_24px.svg'));
-
-
+    iconRegistry.addSvgIcon(
+        'ic_disponible',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/ic_check_black_24px.svg'));
+    iconRegistry.addSvgIcon(
+        'ic_no_disponible',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/ic_clear_black_24px.svg'));
   }
 
   ngOnInit() {
@@ -102,9 +106,13 @@ export class ProductoListComponent implements OnInit {
   }
 
   agregarACarrito(producto: Producto) {
-    this.cartService.agregarProducto(producto);
+    let mensaje = this.cartService.agregarProducto(producto);
+    let snackBarRef = this.snackBar.open(mensaje, 'Deshacer', {duration: 2000, });
+    snackBarRef.onAction().subscribe(null, null, () => {
+      this.snackBar.open('Realizado..', '', {duration: 500, });
+    });
   }
-
+/*
   recibido(event): void {
     console.log('recibido evento ');
     console.log(event);
@@ -125,5 +133,16 @@ export class ProductoListComponent implements OnInit {
 
    cambiarPaginaSiguiente() {
     this.cambiarPagina(this.paginaActual + 1);
+  }
+*/
+  productoEnCarrito(prod: Producto): boolean {
+    if (this.cartService.productoEnCarrito(prod) == null) {
+      return false;
+    }
+    return true;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {duration: 2000, });
   }
 }

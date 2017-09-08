@@ -20,20 +20,26 @@ export class CarritoService {
   constructor() {
   }
 
-  agregarProducto(producto: Producto) {
+  agregarProducto(producto: Producto): string {
     let detalle = this.productoEnCarrito(producto);
-    console.log(detalle);
-    if (detalle == null) {
+    let mensaje = null;
+    if (detalle == null && producto.cantidad > 0) {
       detalle = <DetalleCompra>({
         cantidad: 1,
         subtotal: producto.precio,
         producto: producto,
       });
       this._items.push(detalle);
-    } else {
+      mensaje = 'Producto agregado';
+    } else if (detalle.producto.cantidad < producto.cantidad) {
       detalle.cantidad++;
+      mensaje = 'Agregada 1 unidad';
+    }else {
+      mensaje = 'No hay stock suficiente';
+      return mensaje;
     }
     this._itemsSubject.next(this._items);
+    return mensaje;
   }
 
   getTotal() {
@@ -46,12 +52,27 @@ export class CarritoService {
   }
 
   productoEnCarrito(prod: Producto): DetalleCompra {
-    console.log('se va a comparar');
     for (const det of this._items) {
       if (det.producto.codigo_barras == prod.codigo_barras) {
         return det;
       }
     }
     return null;
+  }
+
+  descartarLista(){
+    this._items = [];
+  }
+
+  disminuirProducto(prod: Producto) {
+    const det = this.productoEnCarrito(prod);
+    if (det != null) {
+      if ( det.cantidad > 1 ) {
+        det.cantidad--;
+      }else {
+        const i = this._items.indexOf( det );
+        i !== -1 && this._items.splice( i, 1 );
+      }
+    }
   }
 }
