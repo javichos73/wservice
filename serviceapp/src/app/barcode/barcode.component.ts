@@ -24,5 +24,4 @@ export class BarcodeComponent {
       window.open('zxing://scan/?ret=' + encodeURIComponent(href + '/producto/detail/{CODE}'));
     }
   }
-
 }

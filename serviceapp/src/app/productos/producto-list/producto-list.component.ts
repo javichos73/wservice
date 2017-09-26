@@ -28,8 +28,8 @@ export class ProductoListComponent implements OnInit {
   tabla = false;
   code$ = new Subject<any>();
   // para tabla
-  numeroItems : number;
-  paginaActual :  number;
+  numeroItems: number;
+  paginaActual:  number;
   paginaAnterior: string;
   paginaSiguiente: string;
   numerosPaginas = [];
@@ -85,10 +85,11 @@ export class ProductoListComponent implements OnInit {
             this.totalPaginas = Math.ceil(this.numeroItems / this.numeroItemsPorPagina);
             this.numerosPaginas = Array(this.totalPaginas).fill(this.totalPaginas, 0).map((_, i) => i + 1);
             this.productos = this.productoService.mapProductos(res.results);
+            this.errorMessage = '';
           },
           err => {
             this.isLoading = false;
-            this.errorMessage = `Error! ${err.json().error}`;
+            this.errorMessage = `Error en la busqueda! ${err.json().error}`;
           }
         );
   }
@@ -101,40 +102,17 @@ export class ProductoListComponent implements OnInit {
       this.buscarProducto();
     }else {
      this.productos = [];
-     //this.isLoading = false;
     }
   }
 
   agregarACarrito(producto: Producto) {
-    let mensaje = this.cartService.agregarProducto(producto);
-    let snackBarRef = this.snackBar.open(mensaje, 'Deshacer', {duration: 2000, });
+    const mensaje = this.cartService.agregarProducto(producto);
+    const snackBarRef = this.snackBar.open(mensaje, 'Deshacer', {duration: 2000, });
     snackBarRef.onAction().subscribe(null, null, () => {
+      this.cartService.disminuirProducto(producto);
       this.snackBar.open('Realizado..', '', {duration: 500, });
     });
   }
-/*
-  recibido(event): void {
-    console.log('recibido evento ');
-    console.log(event);
-  }
-  sliderEv(event): void {
-    console.log('recibido evento slider ');
-    console.log(event);
-  }
-
-  cambiarPagina(numero) {
-   this.paginaActual = numero;
-   this.onChange(this.paginaActual);
-  }
-
-  cambiarPaginaAnterior() {
-    this.cambiarPagina(this.paginaActual - 1);
-  }
-
-   cambiarPaginaSiguiente() {
-    this.cambiarPagina(this.paginaActual + 1);
-  }
-*/
   productoEnCarrito(prod: Producto): boolean {
     if (this.cartService.productoEnCarrito(prod) == null) {
       return false;

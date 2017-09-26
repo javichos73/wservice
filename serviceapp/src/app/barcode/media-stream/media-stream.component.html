@@ -2,8 +2,7 @@
      fxLayoutAlign="center center"
      fxLayoutAlign.xs="start">
     <md-card class="flex-item" fxFlex="50">
-        <p>Mensaje: esta opción solo funciona para Internet explorer 11+. Opcionalmente puede utilizar la
-            aplicación BarCode Scanner</p>
+        <p>Mensaje: esta opción solo funciona para Internet explorer 11+.</p>
         <div id="interactive" class="viewport clearfix" #interactive></div>
     </md-card>
     <md-card class="flex-item app-input-section hidden__sm" fxFlex="50" *ngIf="lastResult">
@@ -17,12 +16,9 @@
                     <span><p>Producto: {{ producto.nombre}}</p>
                             <p>Precio: {{ producto.precio }}</p>
                     </span>
-
                 </a>
                 <em *ngIf="message">{{ message }}</em>
             </div>
         </div>
     </md-card>
 </div>
-
-

@@ -20,22 +20,32 @@ export class CarritoService {
   constructor() {
   }
 
+  /*
+   Metodo para ser llamado desde diferentes vistas
+   y permite agregar un producto al carrito verificando el stock
+   */
   agregarProducto(producto: Producto): string {
     let detalle = this.productoEnCarrito(producto);
     let mensaje = null;
-    if (detalle == null && producto.cantidad > 0) {
-      detalle = <DetalleCompra>({
-        cantidad: 1,
-        subtotal: producto.precio,
-        producto: producto,
-      });
-      this._items.push(detalle);
-      mensaje = 'Producto agregado';
-    } else if (detalle.producto.cantidad < producto.cantidad) {
-      detalle.cantidad++;
-      mensaje = 'Agregada 1 unidad';
-    }else {
-      mensaje = 'No hay stock suficiente';
+    if (producto.cantidad > 0) {
+      if (detalle == null) {
+        detalle = <DetalleCompra>({
+          cantidad: 1,
+          subtotal: producto.precio,
+          producto: producto,
+        });
+        this._items.push(detalle);
+        mensaje = 'Producto agregado';
+      } else if (detalle.cantidad < producto.cantidad) {
+        detalle.cantidad++;
+        mensaje = 'Agregada 1 unidad';
+
+      } else {
+        mensaje = 'No hay stock suficiente1 ';
+        return mensaje;
+      }
+    } else {
+      mensaje = 'No hay stock suficiente2 ';
       return mensaje;
     }
     this._itemsSubject.next(this._items);
@@ -60,18 +70,22 @@ export class CarritoService {
     return null;
   }
 
-  descartarLista(){
+  descartarLista() {
     this._items = [];
   }
 
+  /*
+   Metodo para disminuir unidades en caso de deshacer
+   el agregar un producto en la vista lista de productos.
+   */
   disminuirProducto(prod: Producto) {
     const det = this.productoEnCarrito(prod);
     if (det != null) {
-      if ( det.cantidad > 1 ) {
+      if (det.cantidad > 1) {
         det.cantidad--;
-      }else {
-        const i = this._items.indexOf( det );
-        i !== -1 && this._items.splice( i, 1 );
+      } else {
+        const i = this._items.indexOf(det);
+        i !== -1 && this._items.splice(i, 1);
       }
     }
   }

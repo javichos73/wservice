@@ -82,10 +82,10 @@ export class CarritoComponent implements OnInit {
   }
 
   descartarLista() {
-    let dialogRef = this.dialog.open(CarritoDialog);
+    const dialogRef = this.dialog.open(CarritoDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if (result) {
+      if (result === 'True') {
         this.compra = [];
         this.carritoService.descartarLista();
       }

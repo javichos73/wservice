@@ -1,20 +1,37 @@
-<section class="contenedor">
-    <div class="row">
-        <md-toolbar color="primary">
-            <span>{{ titulo }}</span>
-        </md-toolbar>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <nav class="navbar navbar-default">
-                <a routerLink="/productos" routerLinkActive="active">Buscar Producto</a>
-                <a routerLink="/carrito" routerLinkActive="active">Lista de Compras</a>
-                <span class="example-fill-remaining-space"></span>
-                <a routerLink="/barcode" routerLinkActive="active">Escanear Codigo</a>
-            </nav>
+<md-sidenav-container>
+    <md-sidenav #sidenav mode="side">
+        <div class="flex-container" fxLayout="column">
+            <button class="flex-item" md-raised-button color="primary" [routerLinkActive]="['active']"
+                    [routerLink]="['/productos']">Buscar
+            </button>
+            <div class="flex-item"></div>
+            <button class="flex-item" md-raised-button color="primary" [routerLinkActive]="['active']"
+                    [routerLink]="['/barcode']">Escanear
+            </button>
+            <div class="flex-item"></div>
+            <button class="flex-item" md-raised-button color="primary" [routerLinkActive]="['active']"
+                    [routerLink]="['/carrito']">Carrito
+            </button>
         </div>
+    </md-sidenav>
+    <md-toolbar color="primary">
+        <button md-icon-button (click)="sidenav.toggle()">
+            <md-icon svgIcon="ic_menu" aria-label="menu" class="md-24"></md-icon>
+        </button>
+        {{ titulo }}
+        <span class="app-toolbar-filler"></span>
+
+    </md-toolbar>
+    <div>
+        <nav class="navbar navbar-default">
+            <a routerLink="/productos" routerLinkActive="active">Buscar</a>
+            <a routerLink="/barcode" routerLinkActive="active">Escanear</a>
+            <span class="example-fill-remaining-space"></span>
+            <a routerLink="/carrito" routerLinkActive="active">Lista de Compras</a>
+        </nav>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <router-outlet></router-outlet>
-        </div>
+    <div class="app-content">
+        <router-outlet></router-outlet>
     </div>
-</section>
+</md-sidenav-container>
+<app-fab-menu></app-fab-menu>

@@ -23,9 +23,9 @@
         <tbody>
         <tr *ngFor="let producto of productos">
             <td><a routerLink="/producto/detail/{{ producto.codigo_barras }}"
-                   routerLinkActive="active">{{ producto.nombre }}</a></td>
+                   routerLinkActive="active">{{ producto.nombre  }}</a></td>
             <!--<td>{{ producto.nombre }}</td> -->
-            <td>{{ producto.precio  | currency:'USD':true:'1.2-2' }}</td>
+            <td>{{ producto.precio | currency:'USD': true:'1.2-2' }}</td>
             <td>
                 <span *ngIf="producto.cantidad > 0">
                         <md-icon class="md-icon-18" svgIcon="ic_disponible" aria-label="producto disponible"></md-icon>
@@ -39,7 +39,6 @@
                         (click)="agregarACarrito(producto)">
                     <md-icon class="md-icon-18 md-icon-aling" svgIcon="ic_compra" aria-label="producto no disponible"></md-icon>
                     <span></span> Agregar
-                    <!-- <md-icon svgIcon="ic_compra" class="md-18" aria-label="Agregar a carrito"></md-icon> Agregar -->
                 </button>
             </td>
         </tr>

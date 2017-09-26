@@ -45,18 +45,6 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
       })
       .catch((err) => this.error = `Something Wrong: ${err}`);
 
-    /*this.barcodeValidator.doSearchbyCode(this.code$)
-      .subscribe(
-        res => {
-          this.message = res['prod_nombre'];
-          console.log(Date.now() + ' validador barcode::' + this.vez++);
-          console.log(this.code$);
-        },
-        err => {
-          this.message = `An Error! ${err.json().error}`;
-        }
-      );
-      */
     this.productoService.buscarPorCodigo(this.code$)
       .subscribe(
         res => {
@@ -65,7 +53,7 @@ export class MediaStreamComponent implements OnInit, OnDestroy, AfterContentInit
           this.router.navigate(link);
         },
         err => {
-          this.message = `Error! ${err.json().error}`;
+          this.message = `No se ha encontrado el producto`;
         }
       );
   }

@@ -1,14 +1,15 @@
 <md-card>
 <span class="importante"><em>Seleccione Abrir Camara y enfoque de cerca el codigo</em></span>
-<div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+<div class="flex-container" fxLayout="row" fxLayoutAlign="left center">
         <div class="flex-item">
             <button  md-raised-button color="primary" [routerLink]="['media']">
                 Abrir Camara
             </button>
             <span class="fill-remaining-space"></span>
-            <button md-raised-button color="primary" (click)="barCodeScan()">
+            <!-- <button md-raised-button color="primary" (click)="barCodeScan()">
                 Abrir BarcodeScanner
             </button>
+            -->
         </div>
    </div>
 </md-card>

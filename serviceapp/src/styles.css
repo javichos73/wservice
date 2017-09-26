@@ -5,6 +5,156 @@
   flex: 1 1 auto;
 }
 
-.md-icon-24{
-  height: 24px;
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+}
+
+.app-content {
+  padding: 0px;
+  md-card {
+    margin: 0px;
+  }
+  md-checkbox {
+    margin: 10px;
+  }
+}
+
+.app-sidenav {
+  padding: 10px;
+  min-width: 100px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+  z-index: 99;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  &.smaller {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.app-input-icon {
+  font-size: 1.4em;
+}
+
+.app-list {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  width: 350px;
+  margin: 20px;
+}
+
+.app-progress {
+  margin: 0px;
+}
+
+
+
+.viewport > canvas {
+  position: inherit;
+  width: 100% !important;
+  z-index: 99;
+}
+
+.viewport > video {
+  width: 100% !important;
+}
+
+
+.flex-item {
+  padding-bottom: 6px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.responsive-img {
+  max-width: 100%;
+  max-height: 100px;
+}
+
+.small-img {
+  max-width: 100px;
+  height: 40px;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+.viewport {
+  position: relative;
+}
+
+
+
+.show__sm {
+  display:  none;
+}
+
+@media all and (max-width: 730px) {
+  .hidden__sm {
+    display: none;
+  }
+  .show__sm {
+    display: block;
+  }
+}
+
+.table {
+  font-size:1em;
 }

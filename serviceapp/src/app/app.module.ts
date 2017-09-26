@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
+
 // angular-material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdDialogModule, MdInputModule, MdSpinner} from '@angular/material';
@@ -14,6 +16,9 @@ import { MdIconRegistry} from '@angular/material';
 import { MdIconModule } from '@angular/material';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {MdSnackBarModule } from '@angular/material';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { MdSidenavModule} from '@angular/material';
+
 
 // componentes
 import { AppComponent } from './app.component';
@@ -22,6 +27,8 @@ import {ProductoDetailComponent} from './productos/producto-detail/producto-deta
 import {CarritoComponent, CarritoDialog} from './carrito/carrito.component';
 import { PaginationComponent} from './shared/tabla/pagination.component';
 import {HeaderComponent} from './shared/tabla/header.component';
+import {SidenavComponent} from './shared/sidenav/sidenav.component';
+import {FabMenuComponent} from './shared/fab-menu/fab-menu.component';
 // seccion barcode
 import {BarcodeComponent} from './barcode/barcode.component';
 import {NotFoundComponent} from './shared/not-found/not-found.component';
@@ -44,6 +51,8 @@ import {MaxValidatorDirective} from './shared/validadores/max-validator.directiv
     CarritoComponent,
     // ProductoBusquedaComponent,
     BarcodeComponent,
+    SidenavComponent,
+    FabMenuComponent,
     NotFoundComponent,
     MinValidatorDirective,
     MaxValidatorDirective,
@@ -70,7 +79,8 @@ import {MaxValidatorDirective} from './shared/validadores/max-validator.directiv
     MdIconModule,
     MdDialogModule,
     MdSnackBarModule,
-
+    FlexLayoutModule,
+    MdSidenavModule,
   ],
   providers: [CarritoService, MdIconRegistry, ],
   bootstrap: [AppComponent],

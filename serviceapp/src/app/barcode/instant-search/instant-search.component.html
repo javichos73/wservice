@@ -1,7 +1,9 @@
 <md-card>
     Codigo:
-    <input class="instantInput" [(ngModel)]="codigo" (keyup)="onChange()"
-           placeholder="Ingresa el codigo de barras...">
+    <md-input-container>
+        <input mdInput [(ngModel)]="codigo" (keyup)="onChange()"
+               placeholder="Ingresa el codigo de barras...">
+    </md-input-container>
     <div class="flex-container text-center" fxLayout="row" fxLayoutAlign="center center">
         <div class="flex-item">
             <md-spinner color="accent" class="app-spinner" *ngIf="spinner"></md-spinner>
@@ -11,9 +13,8 @@
                 <section>
                     <h2>Producto: {{ producto.nombre }}</h2>
                     <h3>Descripción</h3>
-                    <p><em>precio:</em> {{ producto.precio }}</p>
+                    <p><em>precio:</em> {{ producto.precio | currency:'USD': true:'1.2-2'}}</p>
                     <p><em>cantidad:</em> {{ producto.cantidad }}.</p>
-
                     <button type="button" class="btn btn-default btn-xs" [disabled]="producto.cantidad <= 0"
                             (click)="agregarACarrito(producto)">
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar a carrito
@@ -23,5 +24,4 @@
             <md-card *ngIf="message"> {{ message }}</md-card>
         </div>
     </div>
-
 </md-card>

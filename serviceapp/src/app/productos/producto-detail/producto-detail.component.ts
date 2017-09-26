@@ -42,7 +42,6 @@ export class ProductoDetailComponent implements OnInit, OnDestroy {
         .get(id)
         .subscribe(p => this.producto = p);
     });
-
   }
 
   ngOnDestroy() {

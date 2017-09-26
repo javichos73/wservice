@@ -1,5 +1,5 @@
 # levantar serve en ssl
-ng serve --host 192.168.2.9 --ssl --ssl-key "C:desarrollo\cert\cert.key" --ssl-cert "C:desarrollo\cert\cert.crt"
+ng serve --host 192.168.1.2 --ssl --ssl-key "C:desarrollo\cert\cert.key" --ssl-cert "C:desarrollo\cert\cert.crt"
 # debug movil
 I:\sw\desarrollo\AndroidSdk\platform-tools\adb forward tcp:9222 localabstract:chrome_devtools_remote
 

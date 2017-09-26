@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import {Producto} from '../../productos/shared/producto';
 import {ProductoService} from '../../productos/shared/producto.service';
 import {CarritoService} from '../../carrito/shared/carrito.service';
+import {MdSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-instant-search',
@@ -21,7 +22,7 @@ export class InstantSearchComponent implements OnInit {
 
   constructor(private barcodeValidator: BarcodeValidatorService,
               private cartService: CarritoService,
-              private productoService: ProductoService) {
+              private productoService: ProductoService, public snackBar: MdSnackBar) {
   }
 
   ngOnInit() {
@@ -31,7 +32,12 @@ export class InstantSearchComponent implements OnInit {
     this.buscarProducto();
   }
   agregarACarrito(producto: Producto) {
-    this.cartService.agregarProducto(producto);
+    const mensaje = this.cartService.agregarProducto(producto);
+    const snackBarRef = this.snackBar.open(mensaje, 'Deshacer', {duration: 2000, });
+    snackBarRef.onAction().subscribe(null, null, () => {
+      this.cartService.disminuirProducto(producto);
+      this.snackBar.open('Realizado..', '', {duration: 500, });
+    });
   }
 
   buscarProducto() {
@@ -39,10 +45,11 @@ export class InstantSearchComponent implements OnInit {
       .subscribe(
         res => {
           this.producto = res;
+          this.message = ``;
         },
         err => {
           this.producto = null;
-          this.message = `Error! ${err.json().error}`;
+          this.message = `Producto no encontrado`;
         }
       );
   }

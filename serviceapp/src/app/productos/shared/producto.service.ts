@@ -88,7 +88,7 @@ export class ProductoService {
   function toProducto(r: any): Producto {
     let imag = r.imagen;
     if (imag === null) {
-      imag = appService.media + '/generico.jpg';
+      imag = appService.media + 'generico.jpg';
     }
     imag = sanitizer.bypassSecurityTrustUrl(imag);
     const producto = <Producto>({
@@ -101,7 +101,6 @@ export class ProductoService {
     });
     return producto;
   }
-
 
   function mapProducto(response: Response): Producto {
      return toProducto(response.json());
